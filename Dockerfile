@@ -1,8 +1,11 @@
 FROM ubuntu
-MAINTAINER Ryan "shiymail@gmail.com"
 RUN apt-get -qq update
 
-RUN apt-get install -y build-essential zip wget gcc make curl libpcre3-dev openssl libssl-dev
+RUN apt-get install -y build-essential zip wget gcc make curl libpcre3-dev openssl libssl-dev gettext
+ 
+RUN  curl -L https://github.com/kreuzwerker/envplate/releases/download/v0.0.8/ep-linux > /usr/local/bin/envplate \
+        && echo -n "8366c3c480379dc325dea725aac86212c5f5d1bf55f5a9ef8e92375f42d55a41  /usr/local/bin/envplate"|sha256sum -c \
+        && chmod 755 /usr/local/bin/envplate
 
 RUN wget -O /tmp/nginx-1.7.9.tar.gz http://nginx.org/download/nginx-1.7.9.tar.gz && \
     wget -O /tmp/LuaJIT-2.0.3.tar.gz http://luajit.org/download/LuaJIT-2.0.3.tar.gz  && \
